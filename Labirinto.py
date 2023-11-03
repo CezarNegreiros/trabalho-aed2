@@ -37,11 +37,6 @@ class Labirinto:
         # Tamanho do labirinto
         self.x = 15
         self.y = 15
-        self.posicaoX = 1
-        self.posicaoY = 0
-
-        #Cria jogador
-
         
         # Cria o labirinto
         self.labirinto = self.criar_labirinto()
@@ -118,21 +113,8 @@ class Labirinto:
                 print('MOVIMENTO INVALIDO')
         except:
             print('movimento invalido')
-    
-    def andar_para_cima(self):
-        self.mover_jogador(self.posicaoX - 1, self.posicaoY)
 
-    def andar_para_baixo(self):
-        self.mover_jogador(self.posicaoX + 1, self.posicaoY)
-
-    def andar_para_esquerda(self):
-        self.mover_jogador(self.posicaoX, self.posicaoY - 1)
-
-    def andar_para_direita(self):
-        self.mover_jogador(self.posicaoX, self.posicaoY + 1)
-
-
-def labirinto_in_game(maze):
+'''def labirinto_in_game(maze):
     while True:
 
         key = msvcrt.getch()
@@ -166,7 +148,7 @@ def labirinto_in_game(maze):
         else:
             print('+-'*15)
             maze.imprimir_labirinto()
-
+'''
         
 
 # Cria uma instância da classe Labirinto
