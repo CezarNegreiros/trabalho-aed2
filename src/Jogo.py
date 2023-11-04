@@ -100,10 +100,10 @@ font = pygame.font.Font(None, 36)
 ultimo_movimento = pygame.time.get_ticks()
 TEMPO_ENTRE_MOVIMENTOS = 200  # 500 milissegundos (0.5 segundos)
 
-imagem_grama = pygame.image.load('grama.png')
-imagem_arbusto = pygame.image.load('arbusto.png')
-imagem_personagem = pygame.image.load('hlinha.png')
-imagem_ovo = pygame.image.load("ovo_branco.png")
+imagem_grama = pygame.image.load('Imagens/grama.png')
+imagem_arbusto = pygame.image.load('Imagens/arbusto.png')
+imagem_personagem = pygame.image.load('Imagens/hlinha.png')
+imagem_ovo = pygame.image.load("Imagens/ovo_branco.png")
 
 # Loop principal do jogo
 run = True
