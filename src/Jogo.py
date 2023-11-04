@@ -2,7 +2,6 @@ from Jogador import Jogador
 from Labirinto import Labirinto
 import pygame
 import Imagens as im
-import Menu as menu
 
 
 
