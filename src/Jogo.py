@@ -1,15 +1,19 @@
 from Jogador import Jogador
 from Labirinto import Labirinto
 import pygame
-from pygame import mixer
+import Imagens as im
+import Menu as menu
 
-def labirinto_in_game(labirinto, jogador):
+
+
+def labirinto_in_game(labirinto, jogador, arbusto, grama, personagem, ovo):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             return False
+        
+    desenhar_labirinto(labirinto, arbusto, grama, personagem,ovo)
 
     keys = pygame.key.get_pressed()
-
     if keys[pygame.K_UP]:
         andar_para_cima(labirinto, jogador)
     elif keys[pygame.K_DOWN]:
@@ -18,7 +22,10 @@ def labirinto_in_game(labirinto, jogador):
         andar_para_esquerda(labirinto, jogador)
     elif keys[pygame.K_RIGHT]:
         andar_para_direita(labirinto, jogador)
-
+    elif keys[pygame.K_ESCAPE]:
+        return False 
+    desenhar_labirinto(labirinto, arbusto, grama, personagem,ovo)
+    
     return True
 
 def mover_jogador(labirinto, jogador, new_x, new_y):
@@ -55,11 +62,6 @@ def desenhar_labirinto(labirinto, arbusto,grama,personagem, ovo):
     inicio_x = (WIDTH - tamanho_x) // 2
     inicio_y = (HEIGHT - tamanho_y) // 2
 
-    grama = pygame.transform.scale(grama, (tamanho_celula, tamanho_celula))  # Redimensiona a imagem para o tamanho da célula
-    arbusto = pygame.transform.scale(arbusto, (tamanho_celula, tamanho_celula))  # Redimensiona a imagem para o tamanho da célula
-    personagem = pygame.transform.scale(personagem, (tamanho_celula, tamanho_celula))  # Redimensiona a imagem para o tamanho da célula
-    ovo = pygame.transform.scale(ovo, (tamanho_celula, tamanho_celula))  # Redimensiona a imagem para o tamanho da célula
-
     for i in range(labirinto.x):
         for j in range(labirinto.y):
             
@@ -67,21 +69,18 @@ def desenhar_labirinto(labirinto, arbusto,grama,personagem, ovo):
 
             if labirinto.maze[i][j] =='X':
                 win.blit(arbusto, (inicio_x + j * tamanho_celula, inicio_y + i * tamanho_celula))
+
+                # Desenha a saída do labirinto
+                win.blit(ovo, (inicio_x + (labirinto.x - 1) * tamanho_celula, inicio_y + (labirinto.y - 2) * tamanho_celula)) 
+
             if labirinto.maze[i][j] == '*':
                 win.blit(personagem, (inicio_x + j * tamanho_celula, inicio_y + i * tamanho_celula))
 
-    # Desenha a saída do labirinto
-    win.blit(ovo, (inicio_x + (labirinto.x - 1) * tamanho_celula, inicio_y + (labirinto.y - 2) * tamanho_celula))
-
-
-# Cria jogador
 jogador = Jogador(1, 0)
-# Cria Labirinto
 labirinto = Labirinto()
 
 # Inicializa o Pygame
 pygame.init()
-pygame.mixer.init()
 
 # Configurações da janela do jogo
 tamanho_celula = 50
@@ -89,41 +88,32 @@ WIDTH = labirinto.x * tamanho_celula
 HEIGHT = labirinto.y * tamanho_celula
 win = pygame.display.set_mode((WIDTH, HEIGHT))
 
-# Cria um relógio para controlar a taxa de quadros por segundo
-clock = pygame.time.Clock()
-FPS = 10  # Defina a taxa de quadros por segundo desejada
-
-# Cria uma fonte
-font = pygame.font.Font(None, 36)
-
 # Variáveis de controle de tempo
+clock = pygame.time.Clock()
 ultimo_movimento = pygame.time.get_ticks()
-TEMPO_ENTRE_MOVIMENTOS = 200  # 500 milissegundos (0.5 segundos)
+TEMPO_ENTRE_MOVIMENTOS = 200 
 
-imagem_grama = pygame.image.load('Imagens/grama.png')
-imagem_arbusto = pygame.image.load('Imagens/arbusto.png')
-imagem_personagem = pygame.image.load('Imagens/hlinha.png')
-imagem_ovo = pygame.image.load("Imagens/ovo_branco.png")
+grama, arbusto, personagem, ovo = im.abrir_imagens(labirinto,WIDTH, HEIGHT)
 
-# Loop principal do jogo
 run = True
+
+first_click = True
+# Loop principal do jogo
+# Loop principal do jogo
 while run:
-    run = labirinto_in_game(labirinto, jogador)
-    # Preenche a janela de branco
-    win.fill((112, 165, 49))
 
-    # Desenha o labirinto diretamente na janela
-    desenhar_labirinto(labirinto, imagem_arbusto, imagem_grama, imagem_personagem, imagem_ovo)
-
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
+    
+    labirinto_in_game(labirinto, jogador,arbusto,grama,personagem,ovo)
+    
     if verifica_vitoria(labirinto, jogador):
-        print('VITÓRIA (/^▽^)/')
         break
 
-    # Atualiza a tela
     pygame.display.update()
 
-    # Limita a taxa de quadros por segundo
-    clock.tick(FPS)
+    clock.tick(15)
 
 # Finaliza o Pygame
 pygame.quit()
