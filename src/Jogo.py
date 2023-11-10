@@ -1,6 +1,7 @@
 from Labirinto import Labirinto
 import pygame
 import Imagens as im
+<<<<<<< HEAD
 
 # lista global que representa as posições já visitadas 
 lista_visitados = []
@@ -69,6 +70,8 @@ def min_heapify(lista, i,tam):
 		min_heapify(lista, min, tam)
 
 	return lista
+=======
+>>>>>>> bd5cb24502e31e834bfecbb03a365ca589ac8e33
 
 
 
