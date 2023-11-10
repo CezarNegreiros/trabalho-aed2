@@ -6,7 +6,8 @@ class Labirinto:
         # Tamanho do labirinto
         self.x = 15
         self.y = 15
-        # Cria o labirinto
+        self.saida_x = 13
+        self.saida_y = 14
         self.maze = self.criar_labirinto()
     
     def criar_labirinto(self):
@@ -47,7 +48,7 @@ class Labirinto:
         # Marca a célula de fim
         marca_visita(end_x, end_y)
 
-        matriz[1][0] = '*'    
+        #matriz[1][0] = '*'    
         return matriz
     
     def imprimir_labirinto(self):
@@ -56,3 +57,9 @@ class Labirinto:
             for j in range(self.y):
                 print(self.maze[i][j], end=' ')
             print()
+    
+    def get_labirinto(self):
+        return self.maze
+
+labirinto = Labirinto()
+labirinto.imprimir_labirinto()

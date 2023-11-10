@@ -1,0 +1,100 @@
+lista_registrados = []
+
+
+def calcula_heuristica(config):
+	
+	passo = 0
+	
+	for j in range(1,5):
+		
+		numero = valorRoda(config, j)
+		
+		if numero > 5: 
+			passo += (10 - numero)
+		else:
+			passo += numero
+			
+	return passo
+
+def valorRoda(config, roda):
+	return (config // 10 ** (4 - roda)) % 10
+
+def gira(config, roda, sentido):
+	peso = 10 ** (4 - roda)
+	
+	digitoAtual = (config // peso) % 10
+
+	if sentido == 'a':
+		proximoDigito = (digitoAtual + 9) % 10
+	else:
+		proximoDigito = (digitoAtual + 1) % 10
+
+	subtrair = digitoAtual * peso
+	somar = proximoDigito * peso
+
+	return config - subtrair + somar
+
+class Estado:
+	def _init_(self, numero, proibidos, passos):
+		
+		self.numero = numero
+		self.proibidos = proibidos
+		self.g = passos
+		self.h = calcula_heuristica(self.numero)
+		self.f = self.g + self.h
+
+	def transicoes(self):
+		
+		valor_h = None
+		valor_a = None
+		saida = []
+		
+		for j in range(1,5):
+			
+			valor_h = gira(self.numero, j, 'a')
+			
+			if valor_h not in self.proibidos and valor_h not in lista_registrados:
+				saida.append(Estado(valor_h, self.proibidos, self.g + 1))
+				
+		for j in range(1, 5):
+			
+			valor_a = gira(self.numero, j, 'h')
+			
+			if valor_a not in self.proibidos and valor_a not in lista_registrados:
+				saida.append(Estado(valor_a, self.proibidos, self.g + 1))
+			
+			
+		return saida
+
+	def _lt_(self, other):
+		# Complete-me
+		return self.f < other.f # Deve comparar aqui
+
+	def _repr_(self):
+		return "{:04d}".format(self.numero)
+
+	
+def menor_passo(classe):
+	
+	if classe.numero == 0:
+		return classe.g
+	else:
+		lista_aprovados = classe.transicoes()
+		lista_registrados.append(classe.numero)
+		heap = []
+		for i in lista_aprovados:
+			heap = insere_chave(heap, len(heap), i)
+		elemento = heap[0]
+		return menor_passo(elemento)
+	
+numero = int(input())
+
+while numero != -1:
+	
+	lista_proibidos = eval(input())
+	primeiro_elemento = Estado(numero, lista_proibidos, 0)
+	
+	print(menor_passo(primeiro_elemento))
+
+	
+	numero = int(input())
