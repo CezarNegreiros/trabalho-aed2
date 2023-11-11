@@ -11,10 +11,10 @@ def abrir_imagens(labirinto, WIDTH, HEIGHT):
     inicio_x = (WIDTH - tamanho_x) // 2
     inicio_y = (HEIGHT - tamanho_y) // 2
 
-    grama = pygame.image.load('Imagens/grama.png')
-    arbusto = pygame.image.load('Imagens/arbusto.png')
-    personagem = pygame.image.load('Imagens/hlinha.png')
-    ovo = pygame.image.load('Imagens/ovo_branco.png')
+    grama = pygame.image.load('src/Imagens/grama.png')
+    arbusto = pygame.image.load('src/Imagens/arbusto.png')
+    personagem = pygame.image.load('src/Imagens/hlinha.png')
+    ovo = pygame.image.load('src/Imagens/ovo_branco.png')
 
     grama = pygame.transform.scale(grama, (tamanho_celula, tamanho_celula))  
     arbusto = pygame.transform.scale(arbusto, (tamanho_celula, tamanho_celula))  
@@ -32,10 +32,10 @@ def menu_principal(labirinto, WIDTH, HEIGHT):
     inicio_x = (WIDTH - tamanho_x) // 2
     inicio_y = (HEIGHT - tamanho_y) // 2
 
-    grama = pygame.image.load('Imagens/grama.png')
-    arbusto = pygame.image.load('Imagens/arbusto.png')
-    personagem = pygame.image.load('Imagens/hlinha.png')
-    ovo = pygame.image.load('Imagens/ovo_branco.png')
+    grama = pygame.image.load('src/Imagens/grama.png')
+    arbusto = pygame.image.load('src/Imagens/arbusto.png')
+    personagem = pygame.image.load('/srcImagens/hlinha.png')
+    ovo = pygame.image.load('src/Imagens/ovo_branco.png')
 
     grama = pygame.transform.scale(grama, (tamanho_celula, tamanho_celula))  
     arbusto = pygame.transform.scale(arbusto, (tamanho_celula, tamanho_celula))  

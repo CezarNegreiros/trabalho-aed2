@@ -115,7 +115,7 @@ clock = pygame.time.Clock()
 ultimo_movimento = pygame.time.get_ticks()
 TEMPO_ENTRE_MOVIMENTOS = 1000
 
-pygame.mixer.music.load('Musica/dragonball.mp3')
+pygame.mixer.music.load('src/Musica/dragonball.mp3')
 
 # Inicia a música (reproduz em um loop infinito)
 pygame.mixer.music.set_volume(0.3)

@@ -13,11 +13,11 @@ def tela_inicial():
 
     pygame.display.set_caption('Tela Inicial')
 
-    grama = pygame.image.load('Imagens/grama.png')
+    grama = pygame.image.load('src/Imagens/grama.png')
 
     # TAMANHO DA FONTE
-    fonte = pygame.font.Font('Fonte/super_mario_256/SuperMario256.ttf', 70)
-    fonte2 = pygame.font.Font('Fonte/super_mario_256/SuperMario256.ttf', 35)
+    fonte = pygame.font.Font('src/Fonte/super_mario_256/SuperMario256.ttf', 70)
+    fonte2 = pygame.font.Font('src/Fonte/super_mario_256/SuperMario256.ttf', 35)
 
     # Títulos
     texto = fonte.render('H\' ESCAPE!', True, (0, 0, 0))
@@ -70,16 +70,16 @@ def tela_final():
     tela = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption('Tela Final - H\' ESCAPE')
 
-    galinha_wins = pygame.image.load('Imagens/galinha_wins.jpeg')
+    galinha_wins = pygame.image.load('src/Imagens/galinha_wins.jpeg')
     
-    pygame.mixer.music.load('Musica/mario.mp3')
+    pygame.mixer.music.load('src/Musica/mario.mp3')
 
     # Inicia a música (reproduz em um loop infinito)
     pygame.mixer.music.play(-1)
 
     # TAMANHO DA FONTE
-    fonte = pygame.font.Font('Fonte/super_mario_256/SuperMario256.ttf', 70)
-    fonte2 = pygame.font.Font('Fonte/super_mario_256/SuperMario256.ttf', 35)
+    fonte = pygame.font.Font('src/Fonte/super_mario_256/SuperMario256.ttf', 70)
+    fonte2 = pygame.font.Font('src/Fonte/super_mario_256/SuperMario256.ttf', 35)
 
     # Títulos
     texto = fonte.render('H\' ESCAPE!', True, (0, 0, 0))
